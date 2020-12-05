@@ -216,6 +216,13 @@ export default class AnimateCC extends React.Component {
 
   // Code to support hidpi screens and responsive scaling.
   resizeCanvas = () => {
+    // TODO: Quick fix..
+    if ((typeof this.canvas !== 'object' || this.canvas === null) &&
+        (typeof this.stage !== 'object' || this.stage === null) && 
+        (typeof this.state !== 'object' || this.state === null) && 
+        (typeof this.dimensions !== 'object' || this.dimensions === null))  {
+      return ;
+    }
     const { properties } = this.state;
     const w = properties.width;
     const h = properties.height;
@@ -226,6 +233,7 @@ export default class AnimateCC extends React.Component {
     const yRatio = ih / h;
     let sRatio = 1;
     const dim = this.dimensions;
+
 
     if (dim.isResp) {
       if ((dim.respDim === "width" && dim.lastW === iw) || (dim.respDim === "height" && dim.lastH === ih)) {
