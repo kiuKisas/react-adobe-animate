@@ -89,8 +89,12 @@ export default class AnimateCC extends React.Component {
 
   onAnimationReady = () => {
     window.addEventListener("resize", this.resizeCanvas);
-    this.resizeCanvas();
-    this.startAnimation();
+    try {
+      this.resizeCanvas();
+      this.startAnimation();
+    } catch(e) {
+      console.error(e)
+    }
   }
 
   getComposition = (searchedName) => {
@@ -216,7 +220,7 @@ export default class AnimateCC extends React.Component {
 
   // Code to support hidpi screens and responsive scaling.
   resizeCanvas = () => {
-    // TODO: Quick fix..
+    // TODO: Quick fix. It probably not the right solution but I keep it just in case.
     if ((typeof this.canvas !== 'object' || this.canvas === null) &&
         (typeof this.stage !== 'object' || this.stage === null) && 
         (typeof this.state !== 'object' || this.state === null) && 
